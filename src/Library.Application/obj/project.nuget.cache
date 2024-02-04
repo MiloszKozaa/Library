@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "h8woToIT/6DYxIDA2RTf3VCBl5hX+2HeqWDvAr54vJi+trg0jHyVIm2xYfzmXe8ydF57QY5JgZsA0eZUZDFVDA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\milos\\source\\repos\\Library\\src\\Library.Application\\Library.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\milos\\.nuget\\packages\\fluentvalidation\\11.8.0\\fluentvalidation.11.8.0.nupkg.sha512",
+    "C:\\Users\\milos\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\milos\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\milos\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
