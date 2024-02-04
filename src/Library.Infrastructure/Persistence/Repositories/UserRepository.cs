@@ -22,9 +22,5 @@ namespace Library.Infrastructure.Persistence.Repositories
         {
             return await _context.Users.AnyAsync(user => user.UserName.ToLower().Trim() == username.ToLower().Trim());
         }
-        public async Task<User> GetUserWithAllDependenciesAsync(Guid id, CancellationToken cancellationToken)
-        {
-            return await _context.Users.Include(user => user.Address).FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
-        }
     }
 }

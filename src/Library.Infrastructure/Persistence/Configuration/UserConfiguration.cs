@@ -12,9 +12,7 @@ namespace Library.Infrastructure.Persistence.Configuration
 
             builder.HasKey(user => user.Id);
 
-            builder.HasOne(user => user.Address)
-                .WithOne()
-                .HasForeignKey<User>(user => user.AddressId);
+            builder.OwnsOne(user => user.Address);
         }
     }
 }

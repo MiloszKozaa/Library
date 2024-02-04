@@ -17,7 +17,7 @@ namespace Library.Application.Features.User.Queries
             }
             public async Task<UserDetailDto> Handle(Query request, CancellationToken cancellationToken)
             {
-                var user = await _userRepository.GetUserWithAllDependenciesAsync(request.Id, cancellationToken);
+                var user = await _userRepository.GetByIdAsync(request.Id, cancellationToken);
 
                 _ = user ?? throw new NotFoundException("Cannot find user by ID");
 
