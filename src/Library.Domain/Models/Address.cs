@@ -1,6 +1,6 @@
 ﻿namespace Library.Domain.Models
 {
-    public class Address : Model
+    public class Address
     {
         public string Country { get; set; }
         public string State { get; set; }

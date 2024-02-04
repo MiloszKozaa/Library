@@ -12,7 +12,7 @@ namespace Library.Application.Dtos
         public DateTime BirthDate { get; set; }    
         public bool isAdult { get; set; }
         public UserRole Role { get; set; }
-        public AddressDto Address { get; set; }
+        public Address Address { get; set; }
 
         public static UserDetailDto CreateFromUser(User user)
         {
@@ -26,7 +26,7 @@ namespace Library.Application.Dtos
                 BirthDate = user.BirthDate,
                 isAdult = user.BirthDate.AddYears(18) <= DateTime.Today,
                 Role = user.Role,
-                Address = AddressDto.CreateFromAddress(user.Address),
+                Address = user.Address,
             };
         }
     }
