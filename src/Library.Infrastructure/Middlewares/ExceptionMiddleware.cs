@@ -22,7 +22,7 @@ namespace Library.Infrastructure.Middlewares
             {
                 await _next(context);
             }
-            catch (ValidatorException ex)
+            catch (BadRequestException ex)
             {
                 await WrapExceptionAsync(context,400,ex.Errors);
             }

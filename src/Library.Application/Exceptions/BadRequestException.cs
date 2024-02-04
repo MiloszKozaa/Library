@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Library.Application.Exceptions
 {
-    public class ValidatorException : Exception
+    public class BadRequestException : ApplicationException
     {
-        public ValidatorException(Dictionary<string, string[]> errors) : base(errors)
+        public BadRequestException(string error) : base(error)
         {
 
         }
