@@ -1,10 +1,8 @@
 ﻿using Library.Application.ApiModels;
-using Library.Application.Exceptions;
 using Library.Application.Features.User.Commands;
 using Library.Application.Features.User.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Library.API.Controllers;
 
@@ -38,9 +36,10 @@ public class UserController : Controller
     public async Task<IActionResult> CreateUser([FromBody] CreateUser.Command command, CancellationToken cancellationToken)
     {
 
-        if(!ModelState.IsValid)
-        {
-            return UnprocessableEntity(command);
+        if (!ModelState.IsValid)
+        { 
+            //List errors in Dictionary<string, string[]> model
+            return BadRequest(ApiResponse.Failure(400, "Bad request"));
         }
 
         var response = await _mediator.Send(command, cancellationToken);
