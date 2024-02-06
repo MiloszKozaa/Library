@@ -1,4 +1,5 @@
 ﻿using Library.Application.Exceptions;
+using Library.Application.Validators;
 using Library.Application.Services.Persistence.Repositories;
 using Library.Domain.Models;
 using MediatR;
@@ -7,24 +8,23 @@ namespace Library.Application.Features.User.Commands;
 public static class CreateUser
 {
     public sealed record Address(string Country, string State, string City, string PostCode, string StreetName, string StreetNumber, string? FlatNumber);
-    public sealed record Command(string FirstName, string LastName, string Email, string UserName, string Password, DateTime BirthDate, UserRole Role, Address Address) : IRequest<object>;
+    public sealed record Command(string FirstName, string LastName, string Email, string UserName, string Password, DateTime BirthDate, UserRole Role, Address? Address) : IRequest<Unit>;
 
-    public sealed class Handler : IRequestHandler<Command, object>
+    public sealed class Handler : IRequestHandler<Command, Unit>
     {
         private readonly IUserRepository _userRepository;
         public Handler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
-        public async Task<object> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
             var validator = new UserValidator(_userRepository);
             var result = await validator.ValidateAsync(request, cancellationToken);
 
-
-            foreach (var failure in result.Errors)
+            if(!result.IsValid)
             {
-                throw new BadRequestException(failure.ErrorMessage);
+                throw new ValidatorException(result.Errors.Select(e => e.ErrorMessage.ToString()).ToArray());
             }
 
             var user = new Domain.Models.User
@@ -50,7 +50,7 @@ public static class CreateUser
 
             await _userRepository.AddAsync(user, cancellationToken);
 
-            return new() { };
+            return Unit.Value;
         }
     }
 }

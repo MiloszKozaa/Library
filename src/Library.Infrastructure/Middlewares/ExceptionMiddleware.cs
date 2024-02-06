@@ -32,7 +32,7 @@ namespace Library.Infrastructure.Middlewares
             }
         }
 
-        private async Task WrapExceptionAsync(HttpContext context, int statusCode, Dictionary<string, string[]> errors)
+        private async Task WrapExceptionAsync(HttpContext context, int statusCode, string[] errors)
         {
             var response = context.Response;
             response.ContentType = "application/json";

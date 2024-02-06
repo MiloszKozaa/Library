@@ -6,18 +6,17 @@ using System.Threading.Tasks;
 
 namespace Library.Application.Exceptions
 {
-    public class ApplicationException : Exception
+    public class ApplicationException
     {
-        public Dictionary<string, string[]> Errors {  get; set; }
-        public ApplicationException(string error) : base(error)
+        public string[] Errors {  get; set; }
+
+        public ApplicationException(string error)
         {
-            Errors = new()
-            {
-                {
-                    "Message",
-                    new[] { error }
-                }
-            };
+            Errors = new[] { error };
+        }
+        public ApplicationException(string[] errors)
+        {
+            Errors = errors;
         }
 
     }

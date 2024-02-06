@@ -8,7 +8,7 @@ namespace Library.Application.Exceptions
 {
     public class ValidatorException : ApplicationException
     {
-        public ValidatorException(string error) : base(error)
+        public ValidatorException(string[] errors) : base(errors)
         {
 
         }

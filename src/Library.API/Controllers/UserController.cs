@@ -1,6 +1,7 @@
 ﻿using Library.Application.ApiModels;
 using Library.Application.Features.User.Commands;
 using Library.Application.Features.User.Queries;
+using Library.Application.Services.Persistence.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,9 +12,11 @@ namespace Library.API.Controllers;
 public class UserController : Controller
 {
     private readonly IMediator _mediator;
-    public UserController(IMediator mediator) 
+    private readonly IUserRepository _userRepository;
+    public UserController(IMediator mediator, IUserRepository userRepository) 
     {
         _mediator = mediator;
+        _userRepository = userRepository;
     }
 
     [HttpGet("GetAll")]
@@ -35,13 +38,6 @@ public class UserController : Controller
     [HttpPost("Create")]
     public async Task<IActionResult> CreateUser([FromBody] CreateUser.Command command, CancellationToken cancellationToken)
     {
-
-        if (!ModelState.IsValid)
-        { 
-            //List errors in Dictionary<string, string[]> model
-            return BadRequest(ApiResponse.Failure(400, "Bad request"));
-        }
-
         var response = await _mediator.Send(command, cancellationToken);
 
         return Ok(ApiResponse.Success(201, response));

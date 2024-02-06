@@ -21,9 +21,9 @@
             return new ApiResponse(statusCode, data, EmptyErrorsResponse);
         }
 
-        public static ApiResponse Failure(int statusCode, Dictionary<string, string[]> errors)
+        public static ApiResponse Failure(int statusCode, string[] errors)
         {
-            return new ApiResponse(statusCode, NullDataResponse, errors);
+            return new ApiResponse(statusCode, NullDataResponse, GetErrorTemplate(errors));
         }
 
         public static ApiResponse Failure(int statusCode, string error)

@@ -15,11 +15,21 @@ namespace Library.Infrastructure.Persistence.Repositories
 
         public async Task<bool> EmailExistsAsync(string email, CancellationToken cancellationToken)
         {
+            if(email == null)
+            {
+                return false;
+            }
+
             return await _context.Users.AnyAsync(user => user.Email.ToLower() == email.ToLower());
         }
 
         public async Task<bool> UsernameExistsAsync(string username, CancellationToken cancellationToken)
         {
+            if (username == null)
+            {
+                return false;
+            }
+
             return await _context.Users.AnyAsync(user => user.UserName.ToLower().Trim() == username.ToLower().Trim());
         }
     }
