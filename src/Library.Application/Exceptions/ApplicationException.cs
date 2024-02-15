@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library.Application.Exceptions
 {
-    public class ApplicationException
+    public class ApplicationException : Exception
     {
         public string[] Errors {  get; set; }
 

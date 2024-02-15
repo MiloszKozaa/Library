@@ -1,8 +1,9 @@
 ﻿using FluentValidation;
 using Library.Application.Services.Persistence.Repositories;
+using Library.Domain.Models;
 using static Library.Application.Features.User.Commands.CreateUser;
 
-namespace Library.Application.Validators
+namespace Library.Application.Validators.User
 {
     public sealed class UserValidator : AbstractValidator<Command>
     {
@@ -34,12 +35,12 @@ namespace Library.Application.Validators
                 .Must(date => DateTime.TryParse(date.ToString(), out _));
             RuleFor(prop => prop.Role)
                 .NotNull()
-                .Must(role => Enum.IsDefined(typeof(Domain.Models.UserRole), role))
+                .Must(role => Enum.IsDefined(typeof(UserRole), role))
                 .WithMessage("Role do not exists");
             RuleFor(prop => prop.Address)
                 .NotNull()
                 .Must(address => Validation.IsValidType(address))
-                .WithMessage("Address prop must be type of Address")
+                .WithMessage("Address prop is not an valid object")
                 .SetValidator(new AddressValidator())
                 .When(address => Validation.IsValidType(address));
         }

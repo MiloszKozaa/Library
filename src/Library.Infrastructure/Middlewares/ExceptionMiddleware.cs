@@ -26,10 +26,15 @@ namespace Library.Infrastructure.Middlewares
             {
                 await WrapExceptionAsync(context,400,ex.Errors);
             }
+            catch (ValidatorException ex)
+            {
+                await WrapExceptionAsync(context, 400, ex.Errors);
+            }
             catch (NotFoundException ex)
             {
                 await WrapExceptionAsync(context, 404, ex.Errors);
             }
+            
         }
 
         private async Task WrapExceptionAsync(HttpContext context, int statusCode, string[] errors)

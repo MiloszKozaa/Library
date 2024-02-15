@@ -3,6 +3,7 @@ using Library.Application.Validators;
 using Library.Application.Services.Persistence.Repositories;
 using Library.Domain.Models;
 using MediatR;
+using Library.Application.Validators.User;
 
 namespace Library.Application.Features.User.Commands;
 public static class CreateUser
@@ -24,7 +25,9 @@ public static class CreateUser
 
             if(!result.IsValid)
             {
-                throw new ValidatorException(result.Errors.Select(e => e.ErrorMessage.ToString()).ToArray());
+                string[] errors = result.Errors.Select(e => e.ErrorMessage.ToString()).ToArray();
+
+                throw new ValidatorException(errors);
             }
 
             var user = new Domain.Models.User

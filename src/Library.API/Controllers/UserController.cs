@@ -42,4 +42,13 @@ public class UserController : Controller
 
         return Ok(ApiResponse.Success(201, response));
     }
+
+    [HttpPut("Update")]
+    public async Task<IActionResult> UpdateUser([FromBody] UpdateUser.UpdateCommand command, CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(command, cancellationToken);
+
+        return Ok(ApiResponse.Success(201, response));
+    }
+
 }
